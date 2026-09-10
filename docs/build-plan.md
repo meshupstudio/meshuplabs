@@ -1,10 +1,10 @@
-# Our stack, their platform
+# The store is the asset
 
-**Build plan — Revision 2 — September 2026**
+**Build plan — Revision 3 — September 2026**
 Status: proposed, awaiting sign-off. No code written yet.
 
-Revision 2 replaces the per-client-instance plan. The multi-tenant platform
-question is closed and does not need revisiting. Supersedes
+Revision 3. The plan's shape is unchanged; what changes is the exit story, the
+scope limits, and how the offer is tiered. Supersedes
 [`tech-stack-recommendations.md`](./tech-stack-recommendations.md), which remains
 the record of why option C was chosen for our own site.
 
@@ -12,238 +12,174 @@ the record of why option C was chosen for our own site.
 
 | | |
 |---|---|
-| Our site | Next.js + Payload + PostgreSQL (option C) |
-| Client stores | Duda white label |
-| Template | Next.js — our site only |
+| Our site | Next.js + Payload + Ecwid |
+| Client stores | Duda white label + Ecwid |
+| The constant | One Ecwid store, any front end |
 | Our site build | 3–4 weeks |
 | Client promise | Store live in 2 weeks |
 
-## What this settles
+## What the Ecwid detail actually buys us
 
-Splitting the two systems is the right call, and it removes the largest open risk
-in the previous plan. We are not building a platform. We are reselling one, and
-building a good site to sell it from.
+Duda doesn't have its own store — it bundles Ecwid, and around 83% of all Ecwid
+sites run on Duda. So when we sell a Duda store we are selling an Ecwid store with
+a Duda front end on it.
 
-Everything raised last revision about multi-tenancy, routing other people's money,
-and one bad deploy taking down forty shops on a Friday is now somebody else's
-problem, and they employ people to have it. That was a three-to-five month build
-now avoided entirely.
+The part previously missed: Ecwid is a widget, not a walled platform. It embeds in
+anything, and there is an **official Ecwid plugin for Next.js** — a storefront
+component and buy-buttons, maintained by Ecwid. The same store, with the same
+products, orders, customers and settings, can appear on a Duda site or on a bespoke
+React site we build.
 
-It also shrinks our own site. The last plan had meshuplabs.com doing double duty as
-the proving ground for client delivery. It isn't that any more — it's just our site
-— so it gets simpler and faster, and we should resist keeping the ambition that
-came with the old role.
+That's not a small detail. It means the valuable half of a client's store — the
+catalogue and the trading history, not the page design — is *never* locked to Duda.
+And it means the two systems in the last revision, which were said to share
+nothing, actually share the one layer worth sharing.
 
-### meshuplabs.com — we build and own it
+## The offer this makes possible
 
-Marketing site, case studies, and a small store selling build packages and support
-retainers. Our capability demonstration — proof we're a studio, not only a reseller.
+A genuine ladder rather than a single product with a ceiling. Same commerce engine
+on every rung, so moving up is a redesign, not a migration — and nobody loses an
+order history to climb it.
 
-| Layer | Choice |
-|---|---|
-| Front end | Next.js, from our template |
-| Content | Payload |
-| Database | PostgreSQL |
-| Payments | Stripe Checkout + Billing |
-| Hosting | Railway or Render |
-| Build | 3–4 weeks |
+| | Rung 1 · DIY | Rung 2 · Hybrid | Rung 3 · Custom |
+|---|---|---|---|
+| | **Self-serve store** | **Managed store** | **Bespoke storefront** |
+| What it is | Our Duda starter, our branding on the editor, client runs it day to day. The two-week promise and the volume business. | Same platform, but we do merchandising, content and SEO on a retainer. For clients who bought simplicity and then found they had no time. | We design and build a custom front end and embed their existing store in it. Every product, order and customer carries over untouched. |
+| Front end | Duda | Duda | Next.js |
+| Who runs it | Client, we set up + SEO | Us | Us, designed and built bespoke |
 
-### Client stores — we configure and support them
+**Unchanged on every rung: one Ecwid store — products, orders, customers, payment
+and tax settings.**
 
-Duda white label. Our branding on the editor clients log into, their store running
-on Duda's infrastructure, our team doing setup, migration and SEO.
+> **Why this matters commercially.** The usual problem with a productized entry
+> offer is that our best clients outgrow it and leave. Here they climb instead, and
+> the thing that normally makes leaving painful — moving the catalogue and order
+> history — is exactly the thing we don't have to move. Rung 3 is also where our
+> Next.js template and studio skills stop being decoration on the website and start
+> being the premium product.
 
-| Layer | Choice |
-|---|---|
-| Platform | Duda White Label |
-| Store | Duda eCommerce add-on, per site |
-| Payments | Client's own processor |
-| SEO tools | Built in — genuinely good |
-| Hosting | Duda's, included |
-| Delivery | 2 weeks, config not code |
+## Correcting the previous correction
 
-## A correction from the last revision
+Revision 2 said not to promise clients any portability, because Duda's export is a
+static snapshot. That was right about the *site* and wrong about the *store*. The
+accurate version is more nuanced, and better for us.
 
-The previous plan said to promise clients they own their site and can take it with
-them. On the per-client-Next.js model that was true and a genuine differentiator.
-**On Duda it isn't, and making that promise would put us in a corner.**
+**The honest, sellable position:**
 
-Duda's site export produces a zip of published HTML, CSS, images and scripts — a
-static snapshot, not editable source. For a brochure site that's a partial escape
-hatch. For a *store* it isn't one at all: the cart, checkout, product data and any
-widgets don't come with it. Duda's own client-management design is explicit that
-clients get review-and-request-edits access while the agency retains the account.
+**Their store is genuinely theirs and genuinely portable.** Products, orders,
+customers, tax and payment configuration live in Ecwid and can be lifted onto any
+other website — including one we build them later, or one somebody else builds.
+**The Duda page design is not portable**, and exports only as a static snapshot.
+Say both halves plainly.
 
-So do not sell portability of the site. Sell portability of the things that
-genuinely are theirs, name them plainly, and let that honesty be the differentiator
-— most resellers won't say any of this out loud.
+That's a stronger sales position than the vague "you own everything" most resellers
+imply and can't back up. It's also true, which means it survives the conversation
+where a client actually leaves.
 
-> **What we can honestly promise.** Their domain, registered in their own account.
-> Their payment processor account, holding their own money. Their product data,
-> exported to a spreadsheet on a schedule and handed over on request. Their content
-> and imagery. That's a real ownership story. The site build itself stays with the
-> platform — say so at the sale, not at the exit.
+> **One piece of fine print to check before relying on it.** Duda supports
+> transferring a site to a different account, but where a store is attached the
+> store plan is cancelled in the process and some connections drop, even though
+> tax, shipping and payment settings are retained. Run that transfer once on a
+> throwaway site during the trial so we know the exact steps before doing it live
+> for a departing client.
 
-## What Duda gives us, and what we're accepting
+## Whose Ecwid account is it?
 
-Checked against current sources rather than recalled. The headline is better than
-expected on the thing we're most exposed on, and the constraint is somewhere we may
-not have been looking.
+The most consequential operational decision here, and easy to get wrong by default.
+Ecwid supports staff accounts with their own logins and restricted permissions,
+separate from the owner's billing and profile access — so both arrangements are
+workable, and they say very different things.
 
-### What it gives us
+**Client owns the Ecwid account, we hold staff access.** *Recommended.* The
+ownership promise above becomes literally true, the client's payment settlement is
+unambiguously theirs, and rung 3 is a clean upgrade rather than a handover. We keep
+the work; we just don't keep the hostage.
 
-- **The SEO claim is defensible.** Built-in 301 redirect manager, JSON-LD
-  structured data, automatic canonical tags, strong Core Web Vitals record. This
-  was the biggest worry about our positioning and it's largely answered.
-- **Migration redirects are a managed feature**, not hand-rolled per client —
-  directly de-risking the step most likely to lose a client their rankings.
-- **More commerce than assumed.** Physical goods, digital downloads, services, and
-  genuine subscription and recurring billing — so a client selling memberships or
-  monthly boxes isn't automatically out of scope.
-- **Real white-labeling**, so "clients self-serve on our system" is true in the way
-  that matters: the editor they log into is branded ours.
-- **Zero infrastructure work.** No deployments, databases, backups, monitoring or
-  2am pager. The support retainer becomes almost pure margin on our time.
+**We own the account, client gets staff access.** Stickier and simpler to
+administer at volume, and it's what the platform's design nudges us toward. But it
+quietly contradicts the ownership story, and it makes every departure a
+negotiation. Choose it deliberately if we choose it at all.
 
-### What we're accepting
+## What actually stays out of scope
 
-- **A fixed monthly floor before the first client.** White-label pricing starts
-  around $149/month including roughly four sites — a real bet if signed before
-  anything is sold.
-- **Commerce is a per-site add-on on top of that**, tiered by product count,
-  roughly $7–52 per site per month. Package pricing has to clear it on every client.
-- **A product-count ceiling per tier** — entry tier around 100 products. Fine for
-  most small stores, an instant disqualifier for a catalogue business. Ask product
-  count on the sales call.
-- **Multi-currency is a weak spot** relative to Shopify. A prospect selling
-  internationally in several currencies is a referral, not a sale.
-- **Platform dependency.** Duda's pricing, roadmap and terms are outside our
-  control and set the ceiling on what we can promise. We are a reseller now, with a
-  reseller's margin risk.
+The previous list was too long. Ecwid carries far more than credited — digital
+goods, services, subscriptions and recurring billing, multi-channel selling into
+social and marketplaces, real-time shipping rates, automated tax. Most of what a
+small store needs is present. The genuine limits are narrower and more specific.
 
-> **Verify the numbers before committing.** Published sources disagree on exact
-> tier limits — one puts the middle tier at 1,000 products, another at 2,500 — and
-> pricing moves. Get current figures from Duda directly for the two that decide our
-> margin: *what an extra site costs beyond the four included*, and the
-> transaction-fee position on each commerce tier. Those two numbers set our floor
-> price per client.
+### Refer these elsewhere
 
-## When the white-label tier starts paying
+- **True international multi-currency.** Ecwid converts prices for *display* but
+  settles every order in the store's base currency, and doesn't show local currency
+  at the final checkout step. A business genuinely selling into several currencies
+  wants Shopify. This is the one hard limit worth memorising.
+- **Very large catalogues** are a price question, not a capability one — the tiers
+  ladder up to tens of thousands of products. Quote the tier, don't refuse the work.
+- **Deep bespoke checkout logic** — unusual B2B pricing rules, complex
+  quote-to-order flows. Possible via the API, but it stops being a two-week job.
 
-The base fee is fixed, so it's brutal at one client and forgettable at fifteen.
+### Say yes to these
 
-| Live clients | Base share each | + Commerce | Cost per client | Verdict |
-|---|---|---|---|---|
-| 1 | ~$149 | ~$7–20 | ~$156–169 | Paying for a platform to serve one person |
-| 4 | ~$37 | ~$7–20 | ~$44–57 | Break-even; included sites used up |
-| 10 | ~$15 | ~$7–20 | ~$22–35 + extra-site fee | Works, if the extra-site fee is modest |
-| 20 | ~$7 | ~$7–20 | ~$14–27 + extra-site fee | The model the pricing is designed for |
+- **Subscriptions, memberships, monthly boxes.** Native, not a bolt-on.
+- **Digital downloads and service bookings** alongside physical goods.
+- **Selling on Instagram, Facebook, Google Shopping and marketplaces** from the
+  same catalogue — a strong upsell, and genuinely hard to do well without a
+  platform.
+- **Automated tax and live carrier shipping rates** at the appropriate tier.
 
-**So don't buy it yet.** Line up three or four committed clients first, or run the
-first one or two on a lower tier to prove the delivery process, then upgrade when
-white-label branding is what's actually blocking a sale. Subscribing on day one
-buys a monthly bill and a self-imposed deadline. Figures exclude the extra-site fee
-beyond the included four — the number worth getting from Duda before modelling this
-properly.
+> **Two questions on the sales call, not three.** How many products, and do you
+> sell in more than one currency. The first picks the tier and our price; the
+> second is the only one that can disqualify a prospect outright.
 
-## Recommendation: keep option C for our site, but build a much smaller version
+## Revised recommendation: put Ecwid on our own site too
 
-Our site is no longer the proving ground for client delivery, so it doesn't need
-the machinery the last plan gave it. No product importer. No trimmed client admin.
-No per-client anything. It's a marketing site with a handful of things to sell.
+Revision 2 said to use Stripe Checkout for our handful of packages, because a
+custom cart was overkill. Stripe is still the simpler pure-commerce answer — but it
+teaches us nothing and demonstrates nothing.
 
-Specifically: **don't build a cart and checkout.** We're selling perhaps five
-packages and a recurring retainer, not running a catalogue. Stripe Checkout handles
-one-off purchases and Stripe Billing handles retainers — both hosted, both
-compliant, both roughly a day's work against a week or more for the real thing.
-Payload runs content, Stripe runs the money, and we keep every reason option C was
-chosen: our template, our database, our control over the SEO we're selling, and no
-per-site platform fee on our own front door.
+**Build meshuplabs.com as Next.js + Payload with an embedded Ecwid store instead.**
+We sell packages and retainers through it, we learn the plugin on our own time
+rather than a client's, and our own site becomes a live, inspectable example of
+exactly what rung 3 looks like. When a prospect asks what a custom build gets them
+over the self-serve tier, we answer by pointing at the page they're already on.
 
-## Building our own site
+Cost is one entry-tier Ecwid plan and perhaps two days over the Stripe route. A
+cheap reference implementation of our most profitable product.
 
-Three to four weeks. Run the Duda trial in parallel from week one — the tracks
-don't block each other, and the trial is what tells us whether the two-week promise
-is real before we print it.
+## What doesn't change
 
-| Week | Focus |
-|---|---|
-| 1 | **Template in, content structure defined.** Services, packages, case studies, retainer tiers. Also: start a Duda trial and begin building the reusable client starter site in it. |
-| 2 | **Content written, packages wired to Stripe.** Checkout for one-off builds, Billing for retainers. Test a purchase and a cancellation properly — including the emails. |
-| 3 | **SEO, speed, and the proof.** Structured data, sitemaps, image handling — then measure our own site and publish the numbers. If we sell SEO, our own scores are the advertisement. |
-| 4 | **Launch, and run the Duda dry run.** Build one complete practice store end to end and time it. If it doesn't come in comfortably under two weeks with slack, fix the process before selling the promise. |
+The rest of the plan holds, and shouldn't be reopened — none of it is affected by
+what's under Duda's bonnet.
 
-## The two weeks, on Duda
+- **Our site is still option C**, still 3–4 weeks, still Next.js and Payload from
+  our existing template.
+- **The two-week client delivery holds** as written, with the SEO redirect map on
+  days 11–12 still the one genuinely unrecoverable step.
+- **The white-label economics are unchanged** — a fixed monthly base that's
+  punishing at one client and sensible at fifteen, so still don't subscribe until
+  three or four are committed.
+- **The "for now" habits still apply**: bill through our own Stripe, keep
+  onboarding platform-agnostic, avoid custom widget work.
 
-Same shape as before, but almost none of it is now engineering — which is why two
-weeks is a promise we can keep repeatedly rather than heroically.
-
-| When | What |
-|---|---|
-| Before | **Intake, and no start without it.** Products and prices, brand assets, domain access, current site address, photography owner. Ask the product count here — it picks the commerce tier and can disqualify the sale. |
-| Days 1–2 | **Site created from our Duda starter, preview shared.** Minutes, not days, once the starter exists. Client sees something real on day two. |
-| Days 3–5 | **Brand and written pages.** Logo, colours, type, and the about / delivery / returns / contact copy. |
-| Days 6–8 | **Products in, store configured.** Import, images, tax and shipping. Confirm the commerce tier matches the real catalogue size before going further. |
-| Days 9–10 | **Payments connected to their account, tested.** Buy something, refund it, read the confirmation emails. Their processor, their money — we never hold it. |
-| Days 11–12 | **SEO migration — still the risky day.** Duda's redirect manager makes this manageable but doesn't write the map. Every old URL to its new home, entered and checked before cutover. Skipped, this loses a client their search traffic overnight. |
-| Day 13 | **Training on our branded editor, recorded.** Adding a product, editing a page, finding an order. The recording is their reference and our support deflection — and this session is where the DIY half of "DIY hybrid" is actually delivered. |
-| Day 14 | **Domain cutover, live, day-30 check-in booked.** That check-in is where retainers get sold, so calendar it before hanging up. |
-
-## Designing for the words "for now"
-
-Duda *for now* is the right instinct and worth acting on. None of the following
-costs anything today; all of it makes leaving cheaper later, and each is a habit
-rather than a project.
-
-- **Bill clients ourselves, through our own Stripe.** Not through the platform's
-  billing. We keep the customer relationship, and Duda stays a cost line we can
-  swap out rather than the counterparty on our revenue.
-- **Export every client's product data on a schedule.** A monthly spreadsheet per
-  client, kept by us. It's the one genuinely portable asset in a store, it's what
-  makes our ownership promise true, and it costs minutes.
-- **Keep custom platform widgets to a minimum.** Custom widget work is the least
-  portable thing we can build and the first thing we'd rewrite. Prefer
-  configuration over code, and note it when we can't.
-- **Keep intake and onboarding platform-agnostic.** Write the checklist in terms of
-  outcomes — "redirect map built", "payments tested" — not platform menus. Then the
-  process survives a platform change and only the steps beneath it get rewritten.
-
-## Still to decide before the first sale
-
-**What's explicitly out of scope?**
-Now set by Duda's real ceiling, not our preference: large catalogues,
-multi-currency international selling, complex tax, heavy third-party integrations.
-Write the list before the first sales call — it turns an awkward mid-build
-discovery into a clean referral.
-
-**What does the retainer actually include?**
-With no infrastructure to maintain, we're selling time and attention: content
-changes, SEO reporting, being reachable. Put a number on the hours and say what's
-billable beyond them.
-
-**What happens if a client leaves?**
-Decide now, in writing, while it's hypothetical. They get their domain, their
-payment account and their data export — and they know that from the first
-conversation, not the last one.
-
-**When do we subscribe to white label?**
-At three or four committed clients, not before. Until then the branding isn't what's
-losing us the sale, and the bill is real from month one.
+One habit from that list can be retired. Revision 2 suggested exporting every
+client's product data monthly as our portable asset — that was insurance against a
+lock-in that turns out not to exist at the store layer. Keep backups because
+backups are sensible, not because we're planning an escape.
 
 ## Sources
 
-Platform details checked in September 2026 rather than recalled. Pricing and tier
-limits change — confirm current figures with Duda before modelling margins.
+Checked September 2026. Plan tiers and pricing move — confirm current figures with
+Duda and Ecwid before setting package prices.
 
-- [Duda — Plans & Pricing](https://www.duda.co/pricing)
-- [Duda Support — URL Redirects](https://support.duda.co/hc/en-us/articles/26519925447703-URL-Redirects)
-- [Duda Support — Site Export](https://support.duda.co/hc/en-us/articles/26519246857495-Site-Export)
-- [Duda — SEO features](https://www.duda.co/seo)
-- [Duda — eCommerce](https://www.duda.co/ecommerce)
-- [Duda — Client Management](https://www.duda.co/client-management)
-- [Website Planet — Duda vs Shopify](https://www.websiteplanet.com/blog/duda-vs-shopify/)
+- [Ecwid Help Centre — Selling on Next.js websites](https://support.ecwid.com/hc/en-us/articles/4405894647186-Selling-on-Next-js-websites-with-Ecwid)
+- [@ecwid/nextjs-ecwid-plugin](https://www.npmjs.com/package/@ecwid/nextjs-ecwid-plugin)
+- [Ecwid Help Centre — Displaying prices in different currencies](https://support.ecwid.com/hc/en-us/articles/360000857760-Displaying-prices-in-different-currencies)
+- [Ecwid Help Centre — Staff accounts](https://support.ecwid.com/hc/en-us/articles/115005355089-Adding-and-managing-staff-accounts)
+- [Duda Support — Transfer a site to a different account](https://support.duda.co/hc/en-us/articles/26519246911639-Transfer-a-Site-to-a-Different-Account)
+- [Duda Support — URL redirects](https://support.duda.co/hc/en-us/articles/26519925447703-URL-Redirects)
+- [Duda — Plans & pricing](https://www.duda.co/pricing)
 
 ---
 
-Cost figures are indicative and exclude the extra-site fee beyond the four included
-in the white-label plan.
+Ecwid is Ecwid by Lightspeed. Duda bundles it as the native store; this plan
+assumes that continues.
