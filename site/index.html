@@ -56,7 +56,8 @@ p { margin: 0; }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; }
 .logo { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 800; letter-spacing: .14em; font-size: 15px; text-decoration: none; }
 .logo svg { width: 30px; height: 30px; flex: none; }
-.logo b { color: var(--steel); font-weight: 800; }
+.logo b { color: var(--ember); font-weight: 800; }
+.dot { color: var(--ember); }
 .top .phone { font-family: var(--mono); font-size: 13px; color: var(--mute); }
 .subnav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: rgba(13,14,16,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .subnav .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
@@ -234,6 +235,29 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   .statements, .steps { grid-template-columns: minmax(0,1fr); }
   .towns { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .top .phone { display: none; }
+  .valley .towns { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .band { padding-block: 60px; }
+  .hero { padding-block: 40px 56px; }
+  .subnav nav { -webkit-mask-image: linear-gradient(90deg, #000 80%, transparent); mask-image: linear-gradient(90deg, #000 80%, transparent); }
+  .call { padding: 16px; }
+  .line { font-size: 14.5px; grid-template-columns: 38px minmax(0,1fr); }
+  .steps { gap: 0; margin-top: 32px; }
+  .steps li { grid-template-columns: auto minmax(0,1fr); column-gap: 16px; row-gap: 4px; padding-block: 20px; }
+  .steps .n { font-size: 34px; grid-row: span 3; }
+  .plans { margin-top: 36px; }
+  .plan.pick { order: -1; }
+  .plan { padding: 22px; }
+  .addons { min-width: 0; }
+  .addons thead { display: none; }
+  .addons tr { display: grid; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .addons td { border: 0; padding: 0; }
+  .addons td:last-child { text-align: left; padding-left: 0; font-family: var(--mono); font-size: 13.5px; color: var(--steel); white-space: normal; }
+  .map .lbl { font-size: 21px; }
+  .map .lbl.home { font-size: 27px; }
+  .map .tiny { font-size: 16px; }
+  .portrait { max-width: 260px; }
+  .faq summary { font-size: 18px; }
+  .closing .row .btn { width: 100%; justify-content: center; }
   footer .wrap { grid-template-columns: minmax(0,1fr); }
 }
 </style>
@@ -272,7 +296,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     <div class="wrap">
       <div class="stack">
         <p class="eyebrow">AI marketing lab · Central Valley, CA</p>
-        <h1>Never miss a <em>customer</em> again.</h1>
+        <h1>Never miss a <em>customer</em> again<span class="dot">.</span></h1>
         <p class="lede">We build your website, get you found on Google, and answer your phones with AI, 24 hours a day, in English and Spanish. One local team, one monthly price.</p>
         <div class="actions">
           <a class="btn solid" href="#pricing">See pricing</a>
@@ -332,7 +356,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   <section class="band alt" id="services">
     <div class="wrap">
       <p class="eyebrow">What we do</p>
-      <h2 style="margin-top:14px">Found. Called. Booked.</h2>
+      <h2 style="margin-top:14px">Found<span class="dot">.</span> Called<span class="dot">.</span> Booked<span class="dot">.</span></h2>
       <div class="services">
         <article class="svc">
           <svg class="art" viewBox="0 0 300 170" aria-hidden="true">
@@ -405,7 +429,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   <section class="band" id="launch">
     <div class="wrap">
       <p class="eyebrow">The 30-day launch</p>
-      <h2 style="margin-top:14px">Six steps. One month.</h2>
+      <h2 style="margin-top:14px">Six steps<span class="dot">.</span> One month<span class="dot">.</span></h2>
       <ol class="steps">
         <li><span class="n">01</span><span class="when">Week 1</span><h3>Kickoff</h3><p>One call to learn your services, prices, hours and the questions customers always ask.</p></li>
         <li><span class="n">02</span><span class="when">Weeks 1–2</span><h3>Website</h3><p>We write, design and launch your new site, with call tracking built in.</p></li>
@@ -420,7 +444,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   <section class="band alt" id="pricing">
     <div class="wrap">
       <p class="eyebrow">Pricing</p>
-      <h2 style="margin-top:14px">Clear prices. No surprises.</h2>
+      <h2 style="margin-top:14px">Clear prices<span class="dot">.</span> No surprises<span class="dot">.</span></h2>
       <div class="plans">
         <article class="plan">
           <span class="badge">Start here</span>
@@ -490,7 +514,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     <div class="wrap report">
       <div class="stack">
         <p class="eyebrow">Results</p>
-        <h2>You'll know exactly what you got.</h2>
+        <h2>You'll know exactly what you got<span class="dot">.</span></h2>
         <p class="lede">Every month you get one page in plain English. It shows calls, leads and reviews, not vanity numbers. If a number isn't moving, we tell you what we're changing.</p>
       </div>
       <div class="sheet" aria-label="What your monthly report shows">
@@ -510,7 +534,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
       <div class="valley">
       <div class="stack">
       <p class="eyebrow">Service area</p>
-      <h2>Built for the Valley.</h2>
+      <h2>Built for the Valley<span class="dot">.</span></h2>
       <p class="lede">Up and down Highway 99, from Merced to Porterville. We meet you in person.</p>
       <div class="towns">
         <div class="town"><strong>Fresno</strong><span>Home base</span></div>
@@ -529,7 +553,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
       </div>
       <svg class="map" viewBox="0 0 680 570" role="img" aria-label="Map of Central Valley towns we serve, centered on Fresno">
         <path class="a-line" d="M330 30 C420 120 520 200 670 330M400 20 C480 110 590 190 670 250M470 20 C540 90 620 150 670 180" stroke-dasharray="3 7" opacity=".7"/>
-        <text class="tiny" x="560" y="120" transform="rotate(32 560 120)">SIERRA FOOTHILLS</text>
+        <text class="tiny" x="520" y="110" transform="rotate(32 520 110)">SIERRA FOOTHILLS</text>
         <path d="M83 76 L234 198 L332 278 L396 339 L490 468" fill="none" style="stroke:var(--mute)" stroke-width="2" stroke-dasharray="10 8" opacity=".5"/>
         <text class="tiny" x="150" y="122">CA-99</text>
         <g class="a-line" style="stroke:rgba(141,180,220,.35)">
@@ -563,7 +587,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
       <div class="portrait">Founder photo<br>4 × 5 portrait</div>
       <div class="stack">
         <p class="eyebrow">About</p>
-        <h2>One lab. One person you can call.</h2>
+        <h2>One lab<span class="dot">.</span> One person you can call<span class="dot">.</span></h2>
         <p class="lede">Meshup Labs is a local, family-owned team in Fresno. AI does the heavy lifting, so you get agency-level work without agency overhead. And you always talk to the same person who builds your marketing.</p>
         <p class="fine" style="font-family:var(--mono);font-size:13px;color:var(--mute)">Expertise.com award winner, 2022–2024</p>
       </div>
@@ -573,7 +597,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   <section class="band alt" id="faq">
     <div class="wrap">
       <p class="eyebrow">FAQ</p>
-      <h2 style="margin-top:14px">Questions owners ask.</h2>
+      <h2 style="margin-top:14px">Questions owners ask<span class="dot">.</span></h2>
       <div class="faq">
         <details><summary>Will callers know they're talking to AI?</summary><p>It sounds natural, and we're upfront about it. If a caller asks for a person, or the question is outside what it knows, it transfers the call to you or takes a message and texts it to you right away.</p></details>
         <details><summary>Do I need to change my phone number?</summary><p>No. You keep your number. We forward calls to the AI only when you want, for example after hours, when you don't pick up, or all the time.</p></details>
@@ -587,7 +611,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   <section class="band" id="book">
     <div class="wrap closing stack">
       <p class="eyebrow">Book a call</p>
-      <h2>Hear it for yourself.</h2>
+      <h2>Hear it for yourself<span class="dot">.</span></h2>
       <p class="lede">Call our own AI receptionist any time, day or night. Ask it anything about Meshup, then book a 15-minute call with us.</p>
       <div class="row">
         <span class="num" id="phone">(559) 492-0118</span>
