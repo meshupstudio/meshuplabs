@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Meshup Labs builds websites, Google marketing and bilingual AI phone receptionists for Central Valley businesses.">
+<title>Meshup Labs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Schibsted+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+html,body{margin:0}img{max-width:100%}
+/* Layout: one dark cinematic column, full-bleed bands, sticky sub-nav with a persistent "Book a call" button. Single deliberate dark look. */
+:root {
+  --ink: #0d0e10;        /* page ground, faint blue-black */
+  --ink-2: #16181c;      /* raised band */
+  --ink-3: #20232a;      /* card */
+  --line: #2c3038;
+  --bone: #ece8e1;       /* main text */
+  --mute: #9a9ca3;       /* secondary text */
+  --steel: #8db4dc;      /* accent, from the logo's blue */
+  --ember: #e0644a;      /* live signal, from the logo's red */
+  --display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body { background: var(--ink); color: var(--bone); font-family: var(--body); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--steel); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.band { padding-block: clamp(72px, 10vw, 128px); border-top: 1px solid var(--line); }
+.band.alt { background: var(--ink-2); }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -.025em; line-height: 1.02; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(46px, 8.4vw, 112px); }
+h2 { font-size: clamp(36px, 5.6vw, 68px); }
+h3 { font-size: 24px; letter-spacing: -.01em; line-height: 1.15; }
+p { margin: 0; }
+.lede { font-size: clamp(18px, 2vw, 21px); color: var(--mute); max-width: 58ch; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font: 600 15px/1 var(--body); padding: 15px 22px; border-radius: 999px; text-decoration: none; border: 1px solid var(--bone); cursor: pointer; transition: background .2s, color .2s; background: transparent; color: var(--bone); }
+.btn.solid { background: var(--bone); color: var(--ink); }
+.btn.solid:hover { background: var(--steel); border-color: var(--steel); }
+.btn:not(.solid):hover { background: var(--bone); color: var(--ink); }
+.stack { display: grid; gap: 22px; }
+
+/* Header */
+.top { border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; }
+.logo { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 800; letter-spacing: .14em; font-size: 15px; text-decoration: none; }
+.logo svg { width: 30px; height: 30px; flex: none; }
+.logo b { color: var(--steel); font-weight: 800; }
+.top .phone { font-family: var(--mono); font-size: 13px; color: var(--mute); }
+.subnav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: rgba(13,14,16,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.subnav .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
+.subnav nav { display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; }
+.subnav nav::-webkit-scrollbar { display: none; }
+.subnav nav a { font-size: 14px; color: var(--mute); text-decoration: none; white-space: nowrap; padding-block: 6px; }
+.subnav nav a:hover { color: var(--bone); }
+.subnav .btn { padding: 10px 16px; font-size: 14px; flex: none; }
+
+/* Hero */
+.hero { padding-block: clamp(56px, 8vw, 104px) clamp(64px, 8vw, 112px); position: relative; overflow: hidden; }
+.hero::after { content: ""; position: absolute; inset: auto -10% -40% 30%; height: 80%; background: radial-gradient(closest-side, rgba(141,180,220,.16), transparent); pointer-events: none; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; position: relative; z-index: 1; }
+.hero h1 em { font-style: normal; color: var(--steel); }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero .fine { font-family: var(--mono); font-size: 13px; color: var(--mute); }
+
+/* Call demo */
+.call { background: var(--ink-3); border: 1px solid var(--line); border-radius: 22px; padding: 20px; box-shadow: 0 30px 80px -30px rgba(0,0,0,.8); }
+.call-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.live { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.live i { width: 8px; height: 8px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 0 0 rgba(224,100,74,.6); animation: pulse 1.8s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(224,100,74,0); } 100% { box-shadow: 0 0 0 0 rgba(224,100,74,0); } }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.lang button { font: 500 12px/1 var(--mono); color: var(--mute); background: none; border: 0; padding: 7px 11px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--bone); color: var(--ink); }
+.wave { display: flex; align-items: center; gap: 3px; height: 34px; margin: 16px 0 6px; }
+.wave span { flex: 1; background: var(--steel); opacity: .55; border-radius: 2px; height: 30%; animation: wv 1.4s ease-in-out infinite; }
+@keyframes wv { 50% { height: 100%; opacity: .9; } }
+.lines { display: grid; gap: 12px; margin-top: 12px; }
+.line { display: grid; grid-template-columns: 46px minmax(0,1fr); gap: 10px; font-size: 15px; }
+.line .t { font-family: var(--mono); font-size: 11.5px; color: var(--mute); padding-top: 3px; }
+.line .who { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); margin-bottom: 2px; }
+.line.ai .who { color: var(--steel); }
+.call-foot { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--mono); font-size: 11.5px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; color: var(--bone); }
+.chip.ok { border-color: rgba(141,180,220,.5); color: var(--steel); }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border-top: 1px solid var(--line); }
+.stat { padding: 34px 20px 34px 0; display: grid; gap: 6px; }
+.stat + .stat { border-left: 1px solid var(--line); padding-left: 24px; }
+.stat strong { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 5vw, 64px); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--mute); font-size: 15px; }
+
+/* Statements */
+.statements { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(32px, 6vw, 96px); margin-top: 56px; }
+.statement { display: grid; gap: 16px; align-content: start; }
+.statement h3 { font-size: clamp(26px, 3vw, 34px); }
+.statement p { color: var(--mute); }
+
+/* Services */
+.services { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; margin-top: 56px; }
+.svc { background: var(--ink-2); padding: 30px 26px 34px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.svc svg { width: 34px; height: 34px; color: var(--steel); }
+.svc p { color: var(--mute); font-size: 15.5px; }
+.svc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 14.5px; }
+.svc li::before { content: "—  "; color: var(--steel); }
+
+/* Steps (real sequence: the 30-day launch) */
+.steps { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 44px 40px; }
+.steps li { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 22px; }
+.steps .n { font-family: var(--display); font-weight: 800; font-size: 52px; line-height: 1; color: var(--steel); letter-spacing: -.03em; }
+.steps .when { font-family: var(--mono); font-size: 12px; color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.steps p { color: var(--mute); font-size: 15.5px; }
+
+/* Packages */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top: 56px; align-items: start; }
+.plan { border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: grid; gap: 20px; background: var(--ink); min-width: 0; }
+.plan.pick { border-color: var(--steel); background: linear-gradient(180deg, rgba(141,180,220,.08), transparent 60%), var(--ink); }
+.badge { justify-self: start; font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--mute); }
+.plan.pick .badge { border-color: var(--steel); color: var(--steel); }
+.price { display: flex; align-items: baseline; gap: 6px; }
+.price strong { font-family: var(--display); font-weight: 800; font-size: 54px; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.price span { color: var(--mute); }
+.setup { font-family: var(--mono); font-size: 12.5px; color: var(--mute); margin-top: -10px; }
+.plan ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; }
+.plan li { display: grid; grid-template-columns: 18px minmax(0,1fr); gap: 8px; }
+.plan li::before { content: ""; width: 12px; height: 12px; margin-top: 6px; border: 1.5px solid var(--steel); border-radius: 50%; }
+.plan li.plus { color: var(--mute); }
+.plan .btn { justify-content: center; }
+.addons-wrap { margin-top: 48px; overflow-x: auto; }
+.addons { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 520px; }
+.addons caption { text-align: left; font-family: var(--display); font-weight: 800; font-size: 24px; padding-bottom: 14px; }
+.addons th, .addons td { text-align: left; padding: 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.addons th { font-family: var(--mono); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--mute); }
+.addons td:last-child, .addons th:last-child { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; padding-left: 20px; }
+.note { color: var(--mute); font-size: 14.5px; margin-top: 18px; max-width: 70ch; }
+
+/* Report */
+.report { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: clamp(32px,5vw,72px); align-items: center; }
+.sheet { background: var(--ink-3); border: 1px solid var(--line); border-radius: 18px; padding: 24px; font-family: var(--mono); font-size: 13.5px; }
+.sheet .row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+.sheet .row:last-child { border-bottom: 0; }
+.sheet .row span:last-child { color: var(--mute); text-align: right; }
+.sheet .head { color: var(--steel); text-transform: uppercase; letter-spacing: .1em; font-size: 11.5px; padding-bottom: 8px; }
+
+/* Graphics */
+#mesh { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .7; pointer-events: none; }
+.svc .art { width: 100%; height: auto; max-width: 100%; display: block; margin-bottom: 8px; }
+.a-card { fill: var(--ink); stroke: var(--line); stroke-width: 1.5; }
+.a-raise { fill: var(--ink-3); }
+.a-line { stroke: var(--line); stroke-width: 1.5; fill: none; }
+.a-mute { fill: var(--line); }
+.a-steel { fill: var(--steel); }
+.a-steel-s { stroke: var(--steel); fill: none; stroke-width: 2; }
+.a-ember { fill: var(--ember); }
+.a-txt { font-family: var(--mono); font-size: 11px; fill: var(--bone); }
+.a-txt.m { fill: var(--mute); }
+.a-txt.s { fill: var(--steel); }
+.log { display: grid; gap: 8px; margin-top: 6px; font-family: var(--mono); font-size: 13px; }
+.lr { display: flex; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--ink-2); }
+.lr span:first-child { display: flex; align-items: center; gap: 10px; }
+.lr span:first-child::before { content: ""; width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.lr.miss span:first-child::before { background: var(--ember); }
+.lr.miss { color: var(--mute); }
+.lr.won span:first-child::before { background: var(--steel); }
+.lr.won { border-color: rgba(141,180,220,.35); }
+.lr span:last-child { color: var(--mute); }
+.valley { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.15fr); gap: clamp(32px,5vw,64px); align-items: center; }
+.valley .towns { grid-template-columns: repeat(3, minmax(0,1fr)); margin-top: 8px; }
+.map { width: 100%; height: auto; max-width: 100%; }
+.map .ring { fill: none; stroke: var(--ember); stroke-width: 2; transform-origin: 332px 278px; animation: ring 2.4s ease-out infinite; }
+@keyframes ring { from { transform: scale(.4); opacity: 1; } to { transform: scale(3); opacity: 0; } }
+.map .lbl { font-family: var(--mono); font-size: 13px; fill: var(--bone); }
+.map .lbl.home { font-family: var(--display); font-weight: 800; font-size: 20px; }
+.map .tiny { font-family: var(--mono); font-size: 11px; fill: var(--mute); letter-spacing: .1em; }
+
+/* Towns */
+.towns { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; margin-top: 48px; }
+.town { background: var(--ink); padding: 22px 16px; display: grid; gap: 4px; min-width: 0; }
+.town strong { font-family: var(--display); font-weight: 600; font-size: 19px; }
+.town span { font-family: var(--mono); font-size: 11.5px; color: var(--mute); }
+
+/* Founder */
+.founder { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(32px,5vw,72px); align-items: center; }
+.portrait { aspect-ratio: 4/5; max-width: 100%; border-radius: 22px; border: 1px dashed var(--line); display: grid; place-items: center; text-align: center; color: var(--mute); font-family: var(--mono); font-size: 13px; padding: 24px; background: repeating-linear-gradient(135deg, var(--ink-2) 0 12px, var(--ink) 12px 24px); }
+
+/* FAQ */
+.faq { margin-top: 48px; border-top: 1px solid var(--line); max-width: 860px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; padding: 22px 40px 22px 0; font-family: var(--display); font-weight: 600; font-size: 21px; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 4px; top: 18px; font-size: 28px; color: var(--steel); font-weight: 400; transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { color: var(--mute); padding-bottom: 24px; max-width: 65ch; }
+
+/* Closing */
+.closing { text-align: left; }
+.closing h2 { font-size: clamp(44px, 7.5vw, 104px); }
+.closing .num { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4.4vw, 52px); letter-spacing: -.02em; user-select: all; font-variant-numeric: tabular-nums; }
+.closing .row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px; }
+.copied { font-family: var(--mono); font-size: 13px; color: var(--steel); }
+
+footer { border-top: 1px solid var(--line); padding-block: 48px calc(48px + env(safe-area-inset-bottom, 0px)); }
+footer .wrap { display: grid; grid-template-columns: 1.4fr repeat(3, minmax(0,1fr)); gap: 32px; font-size: 14.5px; }
+footer h4 { margin: 0 0 12px; font-family: var(--mono); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--mute); }
+footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+footer a { text-decoration: none; color: var(--bone); }
+footer a:hover { color: var(--steel); }
+footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border-top: 1px solid var(--line); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+@media (max-width: 960px) {
+  .hero .wrap, .report, .founder, .valley { grid-template-columns: minmax(0,1fr); }
+  .services, .plans { grid-template-columns: minmax(0,1fr); }
+  .steps { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .towns { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  footer .wrap { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .portrait { max-width: 380px; }
+}
+@media (max-width: 640px) {
+  .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .statements, .steps { grid-template-columns: minmax(0,1fr); }
+  .towns { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .top .phone { display: none; }
+  footer .wrap { grid-template-columns: minmax(0,1fr); }
+}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Meshup Labs home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 29 27H3Z" fill="none" stroke="#8db4dc" stroke-width="2"/><path d="M16 3 22.5 15 9.5 15Z" fill="#e0644a"/><path d="M9.5 15 3 27h13Z" fill="#9a9ca3" opacity=".6"/></svg>
+      <span>MESHUP<b>·</b>LABS</span>
+    </a>
+    <span class="phone">Fresno · (559) 492-0118</span>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="wrap">
+    <nav aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#services">Services</a>
+      <a href="#launch">Launch</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#results">Results</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn solid" href="#book">Book a call</a>
+  </div>
+</div>
+
+<main id="top">
+  <section class="hero">
+    <canvas id="mesh" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="stack">
+        <p class="eyebrow">AI marketing lab · Central Valley, CA</p>
+        <h1>Never miss a <em>customer</em> again.</h1>
+        <p class="lede">We build your website, get you found on Google, and answer your phones with AI, 24 hours a day, in English and Spanish. One local team, one monthly price.</p>
+        <div class="actions">
+          <a class="btn solid" href="#pricing">See pricing</a>
+          <a class="btn" href="#launch">How we launch</a>
+        </div>
+        <p class="fine">Live in 30 days · Month to month after 6 · Fresno, Clovis, Madera and beyond</p>
+      </div>
+
+      <figure class="call" aria-label="Example AI receptionist call">
+        <div class="call-head">
+          <span class="live"><i></i>Incoming · 9:47 PM</span>
+          <div class="lang" role="group" aria-label="Call language">
+            <button type="button" id="lang-en" aria-pressed="true" data-lang="en">EN</button>
+            <button type="button" id="lang-es" aria-pressed="false" data-lang="es">ES</button>
+          </div>
+        </div>
+        <div class="wave" aria-hidden="true" id="wave"></div>
+        <div class="lines" id="lines"></div>
+        <div class="call-foot" id="foot"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band" id="overview">
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><strong>24/7</strong><span>Calls answered, nights and weekends</span></div>
+        <div class="stat"><strong>2</strong><span>Languages on every phone agent</span></div>
+        <div class="stat"><strong>30</strong><span>Days from sign-up to fully live</span></div>
+        <div class="stat"><strong>559</strong><span>Local. We live and work here.</span></div>
+      </div>
+      <div class="statements">
+        <div class="statement">
+          <p class="eyebrow">The problem</p>
+          <h3>Your phone rings while you're on a job.</h3>
+          <p>Every unanswered call goes to the next business on Google. Most callers won't leave a voicemail and won't call twice.</p>
+          <div class="log" aria-label="Example: an evening without AI">
+            <div class="lr miss"><span>Missed call</span><span>5:48 PM</span></div>
+            <div class="lr miss"><span>Missed call</span><span>7:12 PM</span></div>
+            <div class="lr miss"><span>Missed call · no voicemail</span><span>9:47 PM</span></div>
+          </div>
+        </div>
+        <div class="statement">
+          <p class="eyebrow">The fix</p>
+          <h3>An AI receptionist trained on your business.</h3>
+          <p>It knows your services, hours and prices, books the job, texts you the details, and hands off to you when a caller needs a person.</p>
+          <div class="log" aria-label="Example: the same evening with AI">
+            <div class="lr won"><span>Answered · quote sent</span><span>5:48 PM</span></div>
+            <div class="lr won"><span>Answered · booked Tue 1 PM</span><span>7:12 PM</span></div>
+            <div class="lr won"><span>Answered · booked Wed 8 AM</span><span>9:47 PM</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="services">
+    <div class="wrap">
+      <p class="eyebrow">What we do</p>
+      <h2 style="margin-top:14px">Found. Called. Booked.</h2>
+      <div class="services">
+        <article class="svc">
+          <svg class="art" viewBox="0 0 300 170" aria-hidden="true">
+            <rect class="a-card" x="10" y="8" width="280" height="154" rx="12"/>
+            <path class="a-line" d="M10 32h280"/>
+            <circle class="a-ember" cx="26" cy="20" r="4"/><circle class="a-mute" cx="40" cy="20" r="4"/><circle class="a-mute" cx="54" cy="20" r="4"/>
+            <rect class="a-raise" x="72" y="14" width="150" height="12" rx="6"/>
+            <rect class="a-steel" x="28" y="50" width="120" height="12" rx="3"/>
+            <rect class="a-mute" x="28" y="70" width="140" height="7" rx="3"/>
+            <rect class="a-mute" x="28" y="83" width="110" height="7" rx="3"/>
+            <rect class="a-steel" x="28" y="104" width="74" height="22" rx="11"/>
+            <text class="a-txt" x="40" y="119" style="fill:var(--ink)">Call now</text>
+            <rect class="a-raise" x="182" y="46" width="90" height="96" rx="8"/>
+            <path class="a-steel-s" d="M196 128 227 70 258 128Z" opacity=".8"/>
+            <path class="a-line" d="M211.5 99h31M227 70v58"/>
+            <rect class="a-mute" x="28" y="138" width="58" height="6" rx="3"/><rect class="a-mute" x="94" y="138" width="58" height="6" rx="3"/>
+          </svg>
+          <h3>Websites</h3>
+          <p>Fast, mobile-first sites written to turn visitors into calls, hosted and kept up to date for you.</p>
+          <ul><li>Live in 1 to 2 weeks</li><li>Call and form tracking</li><li>Spanish version available</li></ul>
+        </article>
+        <article class="svc">
+          <svg class="art" viewBox="0 0 300 170" aria-hidden="true">
+            <rect class="a-card" x="10" y="8" width="280" height="154" rx="12"/>
+            <path class="a-line" d="M10 60 C80 50 120 90 180 70 S260 40 290 52M60 8 C70 60 50 110 80 162M200 8c-10 50 20 100 0 154M10 120h280"/>
+            <circle class="a-mute" cx="70" cy="40" r="5"/><circle class="a-mute" cx="240" cy="110" r="5"/><circle class="a-mute" cx="120" cy="140" r="5"/>
+            <path class="a-steel" d="M150 20c-14 0-24 10-24 23 0 17 24 37 24 37s24-20 24-37c0-13-10-23-24-23Z"/>
+            <circle cx="150" cy="43" r="8" style="fill:var(--ink)"/>
+            <rect class="a-raise" x="96" y="94" width="168" height="54" rx="10" style="stroke:var(--line)"/>
+            <text class="a-txt" x="108" y="114">Your Business · Fresno</text>
+            <g class="a-steel">
+              <path d="M112 124l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8Z"/>
+              <path d="M128 124l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8Z"/>
+              <path d="M144 124l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8Z"/>
+              <path d="M160 124l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8Z"/>
+              <path d="M176 124l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.6-4.8 2.6.9-5.4-3.9-3.8 5.4-.8Z"/>
+            </g>
+            <text class="a-txt s" x="196" y="135">Open now</text>
+          </svg>
+          <h3>Google &amp; ads</h3>
+          <p>Show up on the map, in search and in AI answers from ChatGPT and Google. Paid ads when you want leads fast.</p>
+          <ul><li>Google Business Profile</li><li>Reviews on autopilot</li><li>Google, LSA and Meta ads</li></ul>
+        </article>
+        <article class="svc">
+          <svg class="art" viewBox="0 0 300 170" aria-hidden="true">
+            <rect class="a-card" x="10" y="8" width="280" height="154" rx="12"/>
+            <rect class="a-raise" x="40" y="18" width="78" height="134" rx="14" style="stroke:var(--line);stroke-width:1.5"/>
+            <rect class="a-mute" x="66" y="25" width="26" height="4" rx="2"/>
+            <circle class="a-ember" cx="79" cy="50" r="5"/>
+            <text class="a-txt m" x="56" y="72">9:47 PM</text>
+            <g class="a-steel">
+              <rect x="52" y="92" width="4" height="12" rx="2"/><rect x="59" y="86" width="4" height="24" rx="2"/><rect x="66" y="80" width="4" height="36" rx="2"/><rect x="73" y="88" width="4" height="20" rx="2"/><rect x="80" y="82" width="4" height="32" rx="2"/><rect x="87" y="90" width="4" height="16" rx="2"/><rect x="94" y="85" width="4" height="26" rx="2"/><rect x="101" y="93" width="4" height="10" rx="2"/>
+            </g>
+            <rect class="a-steel" x="60" y="126" width="38" height="14" rx="7"/>
+            <rect class="a-raise" x="140" y="30" width="134" height="34" rx="10" style="stroke:var(--line)"/>
+            <text class="a-txt" x="152" y="51">"Come tomorrow?"</text>
+            <rect x="140" y="76" width="134" height="34" rx="10" style="fill:rgba(141,180,220,.14);stroke:var(--steel)"/>
+            <text class="a-txt s" x="152" y="97">Booked · Wed 8 AM</text>
+            <rect class="a-raise" x="140" y="122" width="134" height="26" rx="10" style="stroke:var(--line)"/>
+            <text class="a-txt m" x="152" y="139">Text sent to owner</text>
+          </svg>
+          <h3>AI phone</h3>
+          <p>A voice agent that answers every call, books appointments and texts back missed callers within seconds.</p>
+          <ul><li>English and Spanish</li><li>Books into your calendar</li><li>Transfers to you on request</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="launch">
+    <div class="wrap">
+      <p class="eyebrow">The 30-day launch</p>
+      <h2 style="margin-top:14px">Six steps. One month.</h2>
+      <ol class="steps">
+        <li><span class="n">01</span><span class="when">Week 1</span><h3>Kickoff</h3><p>One call to learn your services, prices, hours and the questions customers always ask.</p></li>
+        <li><span class="n">02</span><span class="when">Weeks 1–2</span><h3>Website</h3><p>We write, design and launch your new site, with call tracking built in.</p></li>
+        <li><span class="n">03</span><span class="when">Week 2</span><h3>Google</h3><p>Your Business Profile gets rebuilt, review requests go out, and you're listed in 30+ directories.</p></li>
+        <li><span class="n">04</span><span class="when">Week 3</span><h3>AI phone</h3><p>We train your receptionist, test it on 20 practice calls, then turn it on after hours first.</p></li>
+        <li><span class="n">05</span><span class="when">Weeks 3–4</span><h3>Ads</h3><p>Google or Local Services Ads go live on your own card, so you always own the account.</p></li>
+        <li><span class="n">06</span><span class="when">Day 30</span><h3>First report</h3><p>A one-page report: calls answered, leads, new reviews and rankings. Then we tune and repeat.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band alt" id="pricing">
+    <div class="wrap">
+      <p class="eyebrow">Pricing</p>
+      <h2 style="margin-top:14px">Clear prices. No surprises.</h2>
+      <div class="plans">
+        <article class="plan">
+          <span class="badge">Start here</span>
+          <h3>Get Found</h3>
+          <div class="price"><strong>$297</strong><span>/ month</span></div>
+          <p class="setup">$500 one-time setup</p>
+          <ul>
+            <li>Website, hosted and maintained</li>
+            <li>Google Business Profile with weekly posts</li>
+            <li>Automated review requests</li>
+            <li>Missed-call text back</li>
+            <li>Monthly report</li>
+          </ul>
+          <a class="btn" href="#book">Start with Get Found</a>
+        </article>
+        <article class="plan pick">
+          <span class="badge">Most chosen</span>
+          <h3>Get Calls</h3>
+          <div class="price"><strong>$597</strong><span>/ month</span></div>
+          <p class="setup">$1,000 one-time setup</p>
+          <ul>
+            <li class="plus">Everything in Get Found</li>
+            <li>AI phone receptionist, 300 minutes</li>
+            <li>Local SEO and 2 blog posts a month</li>
+            <li>Visibility in ChatGPT and Google AI answers</li>
+            <li>Google Ads or Local Services Ads management</li>
+          </ul>
+          <a class="btn solid" href="#book">Start with Get Calls</a>
+        </article>
+        <article class="plan">
+          <span class="badge">Full service</span>
+          <h3>Get Booked</h3>
+          <div class="price"><strong>$1,197</strong><span>/ month</span></div>
+          <p class="setup">$1,500 one-time setup</p>
+          <ul>
+            <li class="plus">Everything in Get Calls</li>
+            <li>Facebook and Instagram ads</li>
+            <li>8 short videos a month</li>
+            <li>AI chat on your website</li>
+            <li>Bilingual phone agent</li>
+            <li>Monthly strategy call</li>
+          </ul>
+          <a class="btn" href="#book">Start with Get Booked</a>
+        </article>
+      </div>
+
+      <div class="addons-wrap">
+        <table class="addons">
+          <caption>Add-ons</caption>
+          <thead><tr><th scope="col">Service</th><th scope="col">Price</th></tr></thead>
+          <tbody>
+            <tr><td>Google Ads or Meta ads management, on its own</td><td>$397/mo + $300 setup</td></tr>
+            <tr><td>Google and Meta ads management together</td><td>$697/mo + $500 setup</td></tr>
+            <tr><td>AI phone receptionist only</td><td>$197/mo + $300 setup</td></tr>
+            <tr><td>Spanish version of site and phone agent</td><td>$150/mo</td></tr>
+            <tr><td>Extra AI phone minutes</td><td>$0.25/min</td></tr>
+            <tr><td>Website only, no monthly plan</td><td>from $1,500</td></tr>
+            <tr><td>Logo and brand kit</td><td>$500</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Ad budgets are paid by you directly to Google or Meta. We suggest at least $500 a month. Management fees cover budgets up to $2,500 a month; above that it's 15% of spend. Plans run 6 months, then month to month.</p>
+    </div>
+  </section>
+
+  <section class="band" id="results">
+    <div class="wrap report">
+      <div class="stack">
+        <p class="eyebrow">Results</p>
+        <h2>You'll know exactly what you got.</h2>
+        <p class="lede">Every month you get one page in plain English. It shows calls, leads and reviews, not vanity numbers. If a number isn't moving, we tell you what we're changing.</p>
+      </div>
+      <div class="sheet" aria-label="What your monthly report shows">
+        <div class="head">Monthly report · what's measured</div>
+        <div class="row"><span>Calls answered by AI</span><span>day / after hours</span></div>
+        <div class="row"><span>Appointments booked</span><span>by source</span></div>
+        <div class="row"><span>Missed calls texted back</span><span>reply rate</span></div>
+        <div class="row"><span>New Google reviews</span><span>avg. rating</span></div>
+        <div class="row"><span>Map pack ranking</span><span>top keywords</span></div>
+        <div class="row"><span>Ad spend vs. leads</span><span>cost per lead</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="area">
+    <div class="wrap">
+      <div class="valley">
+      <div class="stack">
+      <p class="eyebrow">Service area</p>
+      <h2>Built for the Valley.</h2>
+      <p class="lede">Up and down Highway 99, from Merced to Porterville. We meet you in person.</p>
+      <div class="towns">
+        <div class="town"><strong>Fresno</strong><span>Home base</span></div>
+        <div class="town"><strong>Clovis</strong><span>Fresno Co.</span></div>
+        <div class="town"><strong>Madera</strong><span>Madera Co.</span></div>
+        <div class="town"><strong>Visalia</strong><span>Tulare Co.</span></div>
+        <div class="town"><strong>Hanford</strong><span>Kings Co.</span></div>
+        <div class="town"><strong>Merced</strong><span>Merced Co.</span></div>
+        <div class="town"><strong>Sanger</strong><span>Fresno Co.</span></div>
+        <div class="town"><strong>Selma</strong><span>Fresno Co.</span></div>
+        <div class="town"><strong>Reedley</strong><span>Fresno Co.</span></div>
+        <div class="town"><strong>Kerman</strong><span>Fresno Co.</span></div>
+        <div class="town"><strong>Tulare</strong><span>Tulare Co.</span></div>
+        <div class="town"><strong>Porterville</strong><span>Tulare Co.</span></div>
+      </div>
+      </div>
+      <svg class="map" viewBox="0 0 680 570" role="img" aria-label="Map of Central Valley towns we serve, centered on Fresno">
+        <path class="a-line" d="M330 30 C420 120 520 200 670 330M400 20 C480 110 590 190 670 250M470 20 C540 90 620 150 670 180" stroke-dasharray="3 7" opacity=".7"/>
+        <text class="tiny" x="560" y="120" transform="rotate(32 560 120)">SIERRA FOOTHILLS</text>
+        <path d="M83 76 L234 198 L332 278 L396 339 L490 468" fill="none" style="stroke:var(--mute)" stroke-width="2" stroke-dasharray="10 8" opacity=".5"/>
+        <text class="tiny" x="150" y="122">CA-99</text>
+        <g class="a-line" style="stroke:rgba(141,180,220,.35)">
+          <path d="M83 76 234 198M234 198 332 278M234 198 234 285M234 285 332 278M332 278 364 245M364 245 414 288M332 278 414 288M414 288 454 328M414 288 396 339M332 278 396 339M396 339 454 328M396 339 382 425M234 285 382 425M382 425 512 425M454 328 512 425M512 425 490 468M382 425 490 468M490 468 609 519M512 425 609 519"/>
+        </g>
+        <g class="a-steel">
+          <circle cx="83" cy="76" r="6"/><circle cx="234" cy="198" r="6"/><circle cx="364" cy="245" r="6"/><circle cx="234" cy="285" r="6"/><circle cx="414" cy="288" r="6"/><circle cx="454" cy="328" r="6"/><circle cx="396" cy="339" r="6"/><circle cx="382" cy="425" r="6"/><circle cx="512" cy="425" r="6"/><circle cx="490" cy="468" r="6"/><circle cx="609" cy="519" r="6"/>
+        </g>
+        <circle class="ring" cx="332" cy="278" r="10"/>
+        <circle class="a-ember" cx="332" cy="278" r="10"/>
+        <text class="lbl" x="95" y="80">Merced</text>
+        <text class="lbl" x="246" y="202">Madera</text>
+        <text class="lbl" x="364" y="230" text-anchor="middle">Clovis</text>
+        <text class="lbl" x="222" y="289" text-anchor="end">Kerman</text>
+        <text class="lbl home" x="318" y="270" text-anchor="end">Fresno</text>
+        <text class="lbl" x="426" y="292">Sanger</text>
+        <text class="lbl" x="466" y="332">Reedley</text>
+        <text class="lbl" x="384" y="343" text-anchor="end">Selma</text>
+        <text class="lbl" x="370" y="429" text-anchor="end">Hanford</text>
+        <text class="lbl" x="524" y="429">Visalia</text>
+        <text class="lbl" x="478" y="472" text-anchor="end">Tulare</text>
+        <text class="lbl" x="597" y="523" text-anchor="end">Porterville</text>
+        <text class="tiny" x="20" y="555">N ↑ · NOT TO SCALE</text>
+      </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="about">
+    <div class="wrap founder">
+      <div class="portrait">Founder photo<br>4 × 5 portrait</div>
+      <div class="stack">
+        <p class="eyebrow">About</p>
+        <h2>One lab. One person you can call.</h2>
+        <p class="lede">Meshup Labs is a local, family-owned team in Fresno. AI does the heavy lifting, so you get agency-level work without agency overhead. And you always talk to the same person who builds your marketing.</p>
+        <p class="fine" style="font-family:var(--mono);font-size:13px;color:var(--mute)">Expertise.com award winner, 2022–2024</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="faq">
+    <div class="wrap">
+      <p class="eyebrow">FAQ</p>
+      <h2 style="margin-top:14px">Questions owners ask.</h2>
+      <div class="faq">
+        <details><summary>Will callers know they're talking to AI?</summary><p>It sounds natural, and we're upfront about it. If a caller asks for a person, or the question is outside what it knows, it transfers the call to you or takes a message and texts it to you right away.</p></details>
+        <details><summary>Do I need to change my phone number?</summary><p>No. You keep your number. We forward calls to the AI only when you want, for example after hours, when you don't pick up, or all the time.</p></details>
+        <details><summary>Who owns my website and ad accounts?</summary><p>You do. Ads run on your own Google and Meta accounts with your card, and your domain stays in your name.</p></details>
+        <details><summary>Is there a contract?</summary><p>Plans start with 6 months so the work has time to show results. After that you can stay month to month or cancel any time.</p></details>
+        <details><summary>Can you work in Spanish?</summary><p>Yes. The phone agent, website and ads can all run in English and Spanish.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="book">
+    <div class="wrap closing stack">
+      <p class="eyebrow">Book a call</p>
+      <h2>Hear it for yourself.</h2>
+      <p class="lede">Call our own AI receptionist any time, day or night. Ask it anything about Meshup, then book a 15-minute call with us.</p>
+      <div class="row">
+        <span class="num" id="phone">(559) 492-0118</span>
+        <button class="btn solid" type="button" id="copy">Copy number</button>
+        <span class="copied" id="copied" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 29 27H3Z" fill="none" stroke="#8db4dc" stroke-width="2"/><path d="M16 3 22.5 15 9.5 15Z" fill="#e0644a"/><path d="M9.5 15 3 27h13Z" fill="#9a9ca3" opacity=".6"/></svg><span>MESHUP<b>·</b>LABS</span></a>
+      <p style="color:var(--mute);margin-top:14px;max-width:32ch">AI-powered marketing for Central Valley businesses.</p>
+    </div>
+    <div><h4>Services</h4><ul><li><a href="#services">Websites</a></li><li><a href="#services">Google &amp; ads</a></li><li><a href="#services">AI phone</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#launch">How we launch</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#about">About</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>(559) 492-0118</li><li>Fresno, California</li></ul></div>
+    <div class="legal"><span>© 2026 Meshup Labs</span><span>Privacy · Terms</span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var script = {
+    en: {
+      lines: [
+        ["0:02", "ai", "Thanks for calling Ruiz Plumbing, this is the after-hours assistant. How can I help?"],
+        ["0:06", "caller", "My water heater's leaking in the garage. Can someone come tomorrow?"],
+        ["0:11", "ai", "I can help with that. I have 8 AM or 1 PM tomorrow in Clovis. Which works better?"],
+        ["0:16", "caller", "8 AM, please."],
+        ["0:18", "ai", "You're booked for 8 AM. I'll text you a confirmation, and Mike will call 30 minutes before he arrives."]
+      ],
+      who: { ai: "AI receptionist", caller: "Caller" },
+      chips: ["Booked · Tue 8:00 AM", "Text sent to owner", "Lead saved"]
+    },
+    es: {
+      lines: [
+        ["0:02", "ai", "Gracias por llamar a Ruiz Plumbing, le atiende la asistente nocturna. ¿En qué le puedo ayudar?"],
+        ["0:07", "caller", "Mi calentador de agua está goteando en el garaje. ¿Pueden venir mañana?"],
+        ["0:12", "ai", "Claro. Tengo mañana a las 8 AM o a la 1 PM en Clovis. ¿Cuál le queda mejor?"],
+        ["0:17", "caller", "A las 8, por favor."],
+        ["0:19", "ai", "Listo, quedó para las 8 AM. Le mando un texto de confirmación y Mike le llamará 30 minutos antes."]
+      ],
+      who: { ai: "Recepcionista IA", caller: "Cliente" },
+      chips: ["Cita · mar 8:00 AM", "Texto al dueño", "Cliente guardado"]
+    }
+  };
+  var lines = document.getElementById("lines");
+  var foot = document.getElementById("foot");
+  function render(lang) {
+    var s = script[lang];
+    lines.innerHTML = "";
+    s.lines.forEach(function (l) {
+      var row = document.createElement("div");
+      row.className = "line " + l[1];
+      var t = document.createElement("span"); t.className = "t"; t.textContent = l[0];
+      var body = document.createElement("div");
+      var who = document.createElement("span"); who.className = "who"; who.textContent = s.who[l[1]];
+      body.appendChild(who); body.appendChild(document.createTextNode(l[2]));
+      row.appendChild(t); row.appendChild(body); lines.appendChild(row);
+    });
+    foot.innerHTML = "";
+    s.chips.forEach(function (c, i) {
+      var chip = document.createElement("span"); chip.className = "chip" + (i === 0 ? " ok" : ""); chip.textContent = c; foot.appendChild(chip);
+    });
+    document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+  }
+  document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { render(b.dataset.lang); }); });
+  render("en");
+
+  var canvas = document.getElementById("mesh");
+  if (canvas && canvas.getContext) {
+    var ctx = canvas.getContext("2d"), nodes = [], W = 0, H = 0;
+    var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function size() {
+      var r = canvas.parentElement.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+      W = r.width; H = r.height; canvas.width = W * d; canvas.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    }
+    size();
+    var count = Math.max(18, Math.min(46, Math.round(W / 30)));
+    for (var k = 0; k < count; k++) {
+      nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25, hot: k % 11 === 0 });
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (var a = 0; a < nodes.length; a++) {
+        var p = nodes[a];
+        if (!still) { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1; }
+        for (var b = a + 1; b < nodes.length; b++) {
+          var q = nodes[b], dx = p.x - q.x, dy = p.y - q.y, dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 170) { ctx.strokeStyle = "rgba(141,180,220," + (0.22 * (1 - dist / 170)).toFixed(3) + ")"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke(); }
+        }
+      }
+      nodes.forEach(function (p) { ctx.fillStyle = p.hot ? "rgba(224,100,74,.9)" : "rgba(141,180,220,.55)"; ctx.beginPath(); ctx.arc(p.x, p.y, p.hot ? 3 : 2, 0, Math.PI * 2); ctx.fill(); });
+      if (!still) requestAnimationFrame(draw);
+    }
+    window.addEventListener("resize", function () { size(); if (still) draw(); });
+    draw();
+  }
+
+  var wave = document.getElementById("wave");
+  for (var i = 0; i < 48; i++) {
+    var bar = document.createElement("span");
+    bar.style.animationDelay = (-(i * 97) % 1400) / 1000 + "s";
+    bar.style.height = (25 + ((i * 37) % 60)) + "%";
+    wave.appendChild(bar);
+  }
+
+  var copy = document.getElementById("copy"), copied = document.getElementById("copied"), phone = document.getElementById("phone");
+  copy.addEventListener("click", function () {
+    var text = phone.textContent;
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(phone);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      copied.textContent = "Selected. Press Ctrl+C or ⌘C to copy.";
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { copied.textContent = "Copied."; }, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body>
+</html>
