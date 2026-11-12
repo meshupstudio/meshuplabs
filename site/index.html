@@ -278,6 +278,47 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   .closing .row .btn { width: 100%; justify-content: center; }
   footer .wrap { grid-template-columns: minmax(0,1fr); }
 }
+
+/* ---- Phone funnel: hidden on desktop ---- */
+.m-only { display: none; }
+.dock { display: none; }
+@media (max-width: 640px) {
+  .m-only { display: revert; }
+  .d-only { display: none !important; }
+  .subnav { display: none; }
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .dock { display: flex; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: rgba(12,15,23,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+  .dock .btn { flex: 1; justify-content: center; padding: 14px 12px; font-size: 15px; }
+  .band { padding-block: 48px; }
+  h2 { font-size: clamp(32px, 9vw, 40px); }
+  .step-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); margin-bottom: 10px; }
+  .step-tag i { font-style: normal; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--steel); display: grid; place-items: center; font-size: 11px; }
+  /* 1. Hook */
+  .hero .lede { font-size: 17px; }
+  .hero .actions .btn { flex: 1; justify-content: center; }
+  .hero .fine { display: none; }
+  .call .lines .line:nth-child(n+4) { display: none; }
+  /* 2. Problem / fix */
+  .stats { display: none; }
+  .statements { margin-top: 0; gap: 36px; }
+  .statement p:not(.eyebrow) { display: none; }
+  /* 3. Solution */
+  .services { margin-top: 28px; }
+  .svc { padding: 20px 20px 22px; gap: 8px; }
+  .svc .art, .svc > p { display: none; }
+  .svc ul { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  /* 4. Offer: swipe plans */
+  .plans { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 28px -16px 0; padding: 4px 16px 8px; scrollbar-width: none; }
+  .plans::-webkit-scrollbar { display: none; }
+  .plan { flex: 0 0 86%; scroll-snap-align: center; }
+  .swipe-hint { font-family: var(--mono); font-size: 12px; color: var(--mute); margin-top: 10px; text-align: center; }
+  .addons-wrap, #pricing .note { display: none; }
+  /* 5. Trust */
+  .faq details:nth-child(n+4) { display: none; }
+  /* 6. Action */
+  .closing .row .num { width: 100%; }
+  footer .wrap > div:not(:first-child):not(.legal) { display: none; }
+}
 </style>
 </head>
 <body>
@@ -317,7 +358,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
         <p class="lede">We build your website, get you found on Google, and answer your phones with AI, 24 hours a day, in English and Spanish. One local team, one monthly price.</p>
         <div class="actions">
           <a class="btn solid" href="#pricing">See pricing</a>
-          <a class="btn" href="#launch">How we launch</a>
+          <a class="btn d-only" href="#launch">How we launch</a><a class="btn m-only" href="tel:+15594920118">Call our AI</a>
         </div>
         <p class="fine">Live in 30 days · Month to month after 6 · Fresno, Clovis, Madera and beyond</p>
       </div>
@@ -347,7 +388,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
       </div>
       <div class="statements">
         <div class="statement">
-          <p class="eyebrow">The problem</p>
+          <p class="step-tag m-only"><i>1</i>The problem</p><p class="eyebrow d-only">The problem</p>
           <h3>Your phone rings while you're on a job.</h3>
           <p>Every unanswered call goes to the next business on Google. Most callers won't leave a voicemail and won't call twice.</p>
           <div class="log" aria-label="Example: an evening without AI">
@@ -357,7 +398,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
           </div>
         </div>
         <div class="statement">
-          <p class="eyebrow">The fix</p>
+          <p class="step-tag m-only"><i>2</i>The fix</p><p class="eyebrow d-only">The fix</p>
           <h3>An AI receptionist trained on your business.</h3>
           <p>It knows your services, hours and prices, books the job, texts you the details, and hands off to you when a caller needs a person.</p>
           <div class="log" aria-label="Example: the same evening with AI">
@@ -372,7 +413,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
 
   <section class="band alt" id="services">
     <div class="wrap">
-      <p class="eyebrow">What we do</p>
+      <p class="step-tag m-only"><i>3</i>The fix</p><p class="eyebrow d-only">What we do</p>
       <h2 style="margin-top:14px">Found. Called. <span class="hl">Booked.</span></h2>
       <div class="services">
         <article class="svc">
@@ -443,7 +484,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     </div>
   </section>
 
-  <section class="band" id="launch">
+  <section class="band d-only" id="launch">
     <div class="wrap">
       <p class="eyebrow">The 30-day launch</p>
       <h2 style="margin-top:14px">Six steps. <span class="hl">One month.</span></h2>
@@ -460,7 +501,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
 
   <section class="band alt" id="pricing">
     <div class="wrap">
-      <p class="eyebrow">Pricing</p>
+      <p class="step-tag m-only"><i>4</i>Pick a plan</p><p class="eyebrow d-only">Pricing</p>
       <h2 style="margin-top:14px">Clear prices. <span class="hl">No surprises.</span></h2>
       <div class="plans">
         <article class="plan">
@@ -508,6 +549,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
         </article>
       </div>
 
+      <p class="swipe-hint m-only">Swipe to compare plans →</p>
       <div class="addons-wrap">
         <table class="addons">
           <caption>Add-ons</caption>
@@ -527,7 +569,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     </div>
   </section>
 
-  <section class="band" id="results">
+  <section class="band d-only" id="results">
     <div class="wrap report">
       <div class="stack">
         <p class="eyebrow">Results</p>
@@ -546,7 +588,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     </div>
   </section>
 
-  <section class="band alt" id="area">
+  <section class="band alt d-only" id="area">
     <div class="wrap">
       <div class="valley">
       <div class="stack">
@@ -599,7 +641,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     </div>
   </section>
 
-  <section class="band" id="about">
+  <section class="band d-only" id="about">
     <div class="wrap founder">
       <div class="portrait">Founder photo<br>4 × 5 portrait</div>
       <div class="stack">
@@ -613,7 +655,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
 
   <section class="band alt" id="faq">
     <div class="wrap">
-      <p class="eyebrow">FAQ</p>
+      <p class="step-tag m-only"><i>5</i>Quick answers</p><p class="eyebrow d-only">FAQ</p>
       <h2 style="margin-top:14px">Questions owners ask.</h2>
       <div class="faq">
         <details><summary>Will callers know they're talking to AI?</summary><p>It sounds natural, and we're upfront about it. If a caller asks for a person, or the question is outside what it knows, it transfers the call to you or takes a message and texts it to you right away.</p></details>
@@ -627,17 +669,19 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
 
   <section class="band" id="book">
     <div class="wrap closing stack">
-      <p class="eyebrow">Book a call</p>
+      <p class="step-tag m-only"><i>6</i>Try it now</p><p class="eyebrow d-only">Book a call</p>
       <h2>Hear it for <span class="hl">yourself.</span></h2>
       <p class="lede">Call our own AI receptionist any time, day or night. Ask it anything about Meshup, then book a 15-minute call with us.</p>
       <div class="row">
         <span class="num" id="phone">(559) 492-0118</span>
-        <button class="btn solid" type="button" id="copy">Copy number</button>
+        <a class="btn solid m-only" href="tel:+15594920118">Call (559) 492-0118</a><button class="btn solid d-only" type="button" id="copy">Copy number</button>
         <span class="copied" id="copied" aria-live="polite"></span>
       </div>
     </div>
   </section>
 </main>
+
+<div class="dock" aria-label="Quick actions"><a class="btn" href="#pricing">Pricing</a><a class="btn solid" href="tel:+15594920118">Call our AI</a></div>
 
 <footer>
   <div class="wrap">
