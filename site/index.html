@@ -367,6 +367,56 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
   .quote { flex: 0 0 86%; scroll-snap-align: center; padding: 22px; }
   .quote blockquote { font-size: 16.5px; }
 }
+
+/* ---- Lead journey ---- */
+.journey { margin-top: 44px; }
+.jsteps { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; position: relative; }
+.jsteps button { position: relative; display: grid; gap: 6px; justify-items: start; text-align: left; padding: 16px; border-radius: 16px; border: 1px solid var(--line); background: var(--ink-2); color: var(--bone); font: inherit; cursor: pointer; transition: border-color .2s, background .2s, transform .2s; }
+.jsteps button:hover { border-color: rgba(227,176,75,.5); transform: translateY(-2px); }
+.jsteps button[aria-selected="true"] { border-color: var(--steel); background: linear-gradient(180deg, rgba(227,176,75,.12), transparent 70%), var(--ink-2); }
+.jsteps .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.jsteps button[aria-selected="true"] .k { color: var(--steel); }
+.jsteps b { font-family: var(--display); font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.jpanel { margin-top: 14px; border: 1px solid var(--line); border-radius: 20px; padding: clamp(20px,3vw,32px); background: var(--ink-2); display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 28px; min-height: 180px; }
+.jpanel h3 { font-size: 26px; }
+.jpanel p { color: var(--mute); margin: 10px 0 0; }
+.jpanel .see { border-left: 1px solid var(--line); padding-left: 24px; }
+.jpanel .see .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+.jpanel .see ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
+.jpanel .see li { display: flex; gap: 10px; }
+.jpanel .see li::before { content: "✓"; color: var(--steel); font-weight: 700; }
+.jhint { font-family: var(--mono); font-size: 12px; color: var(--mute); margin-top: 12px; }
+/* ---- Calculator ---- */
+.calc { margin-top: 44px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 22px; }
+.calc .in, .calc .out { border: 1px solid var(--line); border-radius: 22px; padding: clamp(22px,3vw,34px); background: var(--ink); }
+.calc .out { background: linear-gradient(160deg, rgba(227,176,75,.10), transparent 60%), var(--ink); border-color: rgba(227,176,75,.45); display: grid; align-content: center; gap: 14px; }
+.field { display: grid; gap: 10px; }
+.field + .field { margin-top: 26px; }
+.field label { display: flex; justify-content: space-between; gap: 12px; font-weight: 600; }
+.field output { font-family: var(--mono); color: var(--steel); font-weight: 500; }
+.field input[type=range] { width: 100%; accent-color: #E3B04B; height: 28px; }
+.field small { color: var(--mute); font-size: 13.5px; }
+.calc .big { font-family: var(--display); font-weight: 800; font-size: clamp(48px,7vw,84px); line-height: 1; letter-spacing: -.03em; color: var(--steel); }
+.calc .lbl { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.calc .vs { color: var(--mute); }
+.calc .vs b { color: var(--bone); }
+.calc .fine { font-size: 13px; color: var(--mute); }
+@media (max-width: 960px) {
+  .jsteps { grid-template-columns: repeat(5, minmax(0,1fr)); }
+  .jsteps b { font-size: 16px; }
+  .jpanel, .calc { grid-template-columns: minmax(0,1fr); }
+  .jpanel .see { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 18px; }
+}
+@media (max-width: 640px) {
+  .journey { margin-top: 24px; }
+  .jsteps { display: flex; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 2px 16px 4px; gap: 8px; }
+  .jsteps::-webkit-scrollbar { display: none; }
+  .jsteps button { flex: 0 0 auto; padding: 12px 14px; }
+  .jsteps b { font-size: 16px; }
+  .jpanel { min-height: 0; padding: 20px; gap: 18px; }
+  .jpanel h3 { font-size: 22px; }
+  .calc { margin-top: 24px; gap: 14px; }
+}
 </style>
 </head>
 <body>
@@ -386,8 +436,10 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     <nav aria-label="Sections">
       <a href="#overview">Overview</a>
       <a href="#services">Services</a>
+      <a href="#journey">How it works</a>
       <a href="#launch">Launch</a>
       <a href="#calls">Before &amp; after</a>
+      <a href="#calc">Calculator</a>
       <a href="#pricing">Pricing</a>
       <a href="#results">Results</a>
       <a href="#about">About</a>
@@ -533,7 +585,25 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     </div>
   </section>
 
-  <section class="band d-only" id="launch">
+  <section class="band" id="journey">
+    <div class="wrap">
+      <p class="eyebrow">How every lead is tracked</p>
+      <h2 style="margin-top:14px">From first search <span class="hl">to finished job.</span></h2>
+      <div class="journey">
+        <div class="jsteps" role="tablist" aria-label="Lead journey">
+          <button type="button" role="tab" aria-selected="true" data-j="0"><span class="k">Step 1</span><b>Found</b></button>
+          <button type="button" role="tab" aria-selected="false" data-j="1"><span class="k">Step 2</span><b>Called</b></button>
+          <button type="button" role="tab" aria-selected="false" data-j="2"><span class="k">Step 3</span><b>Booked</b></button>
+          <button type="button" role="tab" aria-selected="false" data-j="3"><span class="k">Step 4</span><b>Followed up</b></button>
+          <button type="button" role="tab" aria-selected="false" data-j="4"><span class="k">Step 5</span><b>Reported</b></button>
+        </div>
+        <div class="jpanel" id="jpanel" role="tabpanel" aria-live="polite"></div>
+        <p class="jhint">Tap a step to see what happens.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt d-only" id="launch">
     <div class="wrap">
       <p class="eyebrow">The 30-day launch</p>
       <h2 style="margin-top:14px">Six steps. <span class="hl">One month.</span></h2>
@@ -582,9 +652,40 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     </div>
   </section>
 
-  <section class="band alt" id="pricing">
+  <section class="band alt" id="calc">
     <div class="wrap">
-      <p class="step-tag m-only"><i>5</i>Pick a plan</p><p class="eyebrow d-only">Pricing</p>
+      <p class="step-tag m-only"><i>5</i>Run your numbers</p><p class="eyebrow d-only">Missed-call calculator</p>
+      <h2 style="margin-top:14px">What are missed calls <span class="hl">costing you?</span></h2>
+      <div class="calc">
+        <div class="in">
+          <div class="field">
+            <label for="c-calls">Missed calls a week <output id="o-calls">5</output></label>
+            <input type="range" id="c-calls" min="1" max="40" value="5">
+            <small>After hours, on a job, or on another line.</small>
+          </div>
+          <div class="field">
+            <label for="c-value">Average job value <output id="o-value">$350</output></label>
+            <input type="range" id="c-value" min="50" max="5000" step="50" value="350">
+          </div>
+          <div class="field">
+            <label for="c-rate">Callers who would have booked <output id="o-rate">30%</output></label>
+            <input type="range" id="c-rate" min="10" max="80" step="5" value="30">
+          </div>
+        </div>
+        <div class="out" aria-live="polite">
+          <span class="lbl">Estimated revenue missed each month</span>
+          <span class="big" id="c-lost">$2,258</span>
+          <p class="vs" id="c-vs"></p>
+          <a class="btn solid" href="#pricing" style="justify-self:start">See plans</a>
+          <p class="fine">An estimate using your numbers and 4.3 weeks a month, not a promise of results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="pricing">
+    <div class="wrap">
+      <p class="step-tag m-only"><i>6</i>Pick a plan</p><p class="eyebrow d-only">Pricing</p>
       <h2 style="margin-top:14px">Clear prices. <span class="hl">No surprises.</span></h2>
       <div class="plans">
         <article class="plan">
@@ -738,7 +839,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
 
   <section class="band alt" id="faq">
     <div class="wrap">
-      <p class="step-tag m-only"><i>6</i>Quick answers</p><p class="eyebrow d-only">FAQ</p>
+      <p class="step-tag m-only"><i>7</i>Quick answers</p><p class="eyebrow d-only">FAQ</p>
       <h2 style="margin-top:14px">Questions owners ask.</h2>
       <div class="faq">
         <details><summary>Will callers know they're talking to AI?</summary><p>It sounds natural, and we're upfront about it. If a caller asks for a person, or the question is outside what it knows, it transfers the call to you or takes a message and texts it to you right away.</p></details>
@@ -752,7 +853,7 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
 
   <section class="band" id="book">
     <div class="wrap closing stack">
-      <p class="step-tag m-only"><i>7</i>Try it now</p><p class="eyebrow d-only">Book a call</p>
+      <p class="step-tag m-only"><i>8</i>Try it now</p><p class="eyebrow d-only">Book a call</p>
       <h2>Hear it for <span class="hl">yourself.</span></h2>
       <p class="lede">Call our own AI receptionist any time, day or night. Ask it anything about Meshup, then book a 15-minute call with us.</p>
       <div class="row">
@@ -936,6 +1037,43 @@ footer .legal { grid-column: 1 / -1; color: var(--mute); font-size: 13px; border
     });
     var w = document.querySelector(".ba-wave"), src = document.getElementById("wave");
     if (w && src) w.innerHTML = src.innerHTML;
+  })();
+
+  (function () {
+    var J = [
+      ["Found", "Customers find you on Google Maps, in search, and in answers from ChatGPT and Google AI. Every visit and call is tracked back to where it came from.", ["Which search or ad sent each lead", "Google profile views and calls", "Website visits that turn into calls"]],
+      ["Called", "Every call gets answered, day or night, in English or Spanish. Missed calls get a text back within seconds, so no one slips through.", ["Call recordings and transcripts", "Caller name and what they need", "Texts sent to missed callers"]],
+      ["Booked", "The AI receptionist puts the job straight on your calendar and texts you and the customer a confirmation.", ["New bookings on your calendar", "A text to you for every booking", "Each lead's stage in one pipeline"]],
+      ["Followed up", "Automatic reminders cut no-shows. After the job, customers get a review request, and quiet leads get a friendly follow-up.", ["Appointment reminders sent", "New Google reviews", "Leads that still need a callback"]],
+      ["Reported", "Once a month you get one page in plain English: calls, bookings, reviews and cost per lead. Then we tune what isn't working.", ["Calls answered and booked", "Cost per lead by source", "What we're changing next month"]]
+    ];
+    var panel = document.getElementById("jpanel"), btns = document.querySelectorAll(".jsteps button");
+    function show(i) {
+      var d = J[i];
+      panel.innerHTML = '<div><h3></h3><p></p></div><div class="see"><span class="k">What you see</span><ul></ul></div>';
+      panel.querySelector("h3").textContent = d[0];
+      panel.querySelector("p").textContent = d[1];
+      var ul = panel.querySelector("ul");
+      d[2].forEach(function (t) { var li = document.createElement("li"); li.textContent = t; ul.appendChild(li); });
+      btns.forEach(function (b) { b.setAttribute("aria-selected", String(+b.dataset.j === i)); });
+    }
+    btns.forEach(function (b) { b.addEventListener("click", function () { show(+b.dataset.j); }); });
+    show(0);
+
+    var calls = document.getElementById("c-calls"), val = document.getElementById("c-value"), rate = document.getElementById("c-rate");
+    var fmt = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
+    function calc() {
+      var c = +calls.value, v = +val.value, r = +rate.value / 100;
+      document.getElementById("o-calls").textContent = c;
+      document.getElementById("o-value").textContent = fmt(v);
+      document.getElementById("o-rate").textContent = Math.round(r * 100) + "%";
+      var lost = c * 4.3 * r * v;
+      document.getElementById("c-lost").textContent = fmt(lost);
+      var jobs = Math.max(1, Math.ceil(597 / v));
+      document.getElementById("c-vs").innerHTML = "Get Calls is <b>$597 a month</b>. At " + fmt(v) + " a job, that's about <b>" + jobs + " booked job" + (jobs > 1 ? "s" : "") + "</b> to cover it.";
+    }
+    [calls, val, rate].forEach(function (el) { el.addEventListener("input", calc); });
+    calc();
   })();
 </script>
 
